@@ -1,9 +1,14 @@
 """Quick start script to verify installation and setup."""
 
 import sys
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import torch
 import torchvision
-from pathlib import Path
 
 print("=" * 60)
 print("Cats vs Dogs Classifier - Quick Start Check")
