@@ -34,7 +34,14 @@ VAL_SPLIT = 0.1
 TEST_SPLIT = 0.1
 
 # Device configuration
-DEVICE = "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu"
+# Priority: CUDA (NVIDIA) > MPS (Apple) > CPU
+import torch
+if torch.cuda.is_available():
+    DEVICE = "cuda"
+elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+    DEVICE = "mps"
+else:
+    DEVICE = "cpu"
 
 # Logging
 LOG_INTERVAL = 10  # Log every N batches
