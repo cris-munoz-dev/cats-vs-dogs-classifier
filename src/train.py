@@ -1,17 +1,28 @@
 """Training script for Cats vs Dogs classifier."""
 
+import sys
+from pathlib import Path
+import ssl
+
+# Temporary fix for SSL certificate verification errors
+# This allows downloading pre-trained models
+ssl._create_default_https_context = ssl._create_unverified_context
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
-from pathlib import Path
 from tqdm import tqdm
 import logging
 from typing import Tuple
 
-from src.models.model import create_model, count_parameters
-from src.data.dataset import create_dataloaders
-from src.config import (
+from models.model import create_model, count_parameters
+from data.dataset import create_dataloaders
+from config import (
     RAW_DATA_DIR, CHECKPOINTS_DIR, LOGS_DIR,
     NUM_EPOCHS, LEARNING_RATE, DEVICE, LOG_INTERVAL, SAVE_INTERVAL
 )

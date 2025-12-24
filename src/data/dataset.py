@@ -42,7 +42,7 @@ class CatsDogsDataset(Dataset):
         self.root_dir = Path(root_dir)
         self.transform = transform
         self.samples = []
-        self.class_to_idx = {"cat": 0, "dog": 1}
+        self.class_to_idx = {"cats": 0, "dogs": 1}
         
         # Load all image paths and labels
         self._load_samples()
